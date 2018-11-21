@@ -17,7 +17,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.quchen.spacecowboy.R;
-import com.quchen.spacecowboy.Util;
+import com.quchen.spacecowboy.utility.Util;
 
 public class Config extends Activity {
     /**

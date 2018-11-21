@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite;
 /**
  * Displays the status of the player
  * Poisoned, stuned, frozen
@@ -8,6 +8,10 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.utility.Util;
 
 public class Status extends Sprite {
     public static final byte NUMBER_OF_ROWS = 3;

@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.rock;
 /**
  * A big meteorite that seperates into smaller rocks when destroyed
  *
@@ -7,6 +7,10 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.utility.Util;
 
 public class RockFat extends Rock {
     public static final byte FAT_ROCK_LIFE = 5;

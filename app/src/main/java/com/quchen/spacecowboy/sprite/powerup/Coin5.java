@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.powerup;
 /**
  * Coin that give 5 coins
  *
@@ -7,6 +7,9 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
 
 public class Coin5 extends Coin {
     public static final byte NUMBER_OF_ROWS = 1;

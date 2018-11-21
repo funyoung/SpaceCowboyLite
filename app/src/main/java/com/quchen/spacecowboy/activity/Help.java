@@ -13,17 +13,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.quchen.spacecowboy.CowDance;
-import com.quchen.spacecowboy.CowGhost;
-import com.quchen.spacecowboy.CowZombie;
-import com.quchen.spacecowboy.PowerUpBell;
+import com.quchen.spacecowboy.sprite.cow.CowDance;
+import com.quchen.spacecowboy.sprite.cow.CowGhost;
+import com.quchen.spacecowboy.sprite.cow.CowZombie;
+import com.quchen.spacecowboy.sprite.powerup.PowerUpBell;
 import com.quchen.spacecowboy.R;
-import com.quchen.spacecowboy.Rock;
-import com.quchen.spacecowboy.RockFat;
-import com.quchen.spacecowboy.RockGuided;
-import com.quchen.spacecowboy.Sprite;
-import com.quchen.spacecowboy.Status;
-import com.quchen.spacecowboy.Util;
+import com.quchen.spacecowboy.sprite.rock.Rock;
+import com.quchen.spacecowboy.sprite.rock.RockFat;
+import com.quchen.spacecowboy.sprite.rock.RockGuided;
+import com.quchen.spacecowboy.sprite.Sprite;
+import com.quchen.spacecowboy.sprite.Status;
+import com.quchen.spacecowboy.utility.Util;
 
 public class Help extends Activity {
 

@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.cow;
 /**
  * Cow that doesn't give milk but a protecting shield
  *
@@ -7,6 +7,10 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.utility.Util;
 
 public class CowGhost extends Cow {
     public static final int COW_TYPE = 4;

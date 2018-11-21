@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite;
 /**
  * The class all gameobjects inherit from
  *
@@ -13,6 +13,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.utility.Util;
+
 public abstract class Sprite {
     public static final short SPEED_DEFAULT = 5;
     public static final short ANIMATION_TIME = 50;
@@ -21,13 +24,13 @@ public abstract class Sprite {
 
     protected Bitmap bitmap;
     protected int height, width;
-    protected int x;
-    protected int y;
-    protected int speedX;
-    protected int speedY;
+    public int x;
+    public int y;
+    public int speedX;
+    public int speedY;
     protected Rect src;
     protected Rect dst;
-    protected byte col, row;    // Spritesheet kords
+    public byte col, row;    // Spritesheet kords
     protected byte colNr = 1;
     protected short power;
     protected short frameTime;

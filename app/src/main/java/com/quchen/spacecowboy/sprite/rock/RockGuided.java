@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.rock;
 /**
  * A meteorite that follows the player
  *
@@ -7,6 +7,11 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.sprite.Sprite;
 
 public class RockGuided extends Rock {
     public static final byte POWER_GUIDED_ROCK = 1;

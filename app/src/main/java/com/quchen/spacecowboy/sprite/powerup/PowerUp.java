@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.powerup;
 /**
  * Class that all powerups inherit from
  *
@@ -6,6 +6,10 @@ package com.quchen.spacecowboy;
  */
 
 import android.content.Context;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.sprite.Sprite;
+import com.quchen.spacecowboy.utility.Util;
 
 public abstract class PowerUp extends Sprite {
 

@@ -1,9 +1,12 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
 
 /**
  * Background

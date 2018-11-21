@@ -1,6 +1,6 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.rock;
 /**
- * A meteorite that freezes the player
+ * A meteorite that stuns the player
  *
  * @author lars
  */
@@ -8,16 +8,19 @@ package com.quchen.spacecowboy;
 import android.content.Context;
 import android.graphics.Canvas;
 
-public class RockFrozen extends Rock {
-    public static final byte POWER_FROZEN_ROCK = 1;
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.sprite.Status;
+
+public class RockFlash extends Rock {
+    public static final byte POWER_FLASH_ROCK = 1;
 
     private Status status;
 
-    public RockFrozen(GameView view, Context context) {
+    public RockFlash(GameView view, Context context) {
         super(view, context);
         this.status = new Status(view, context);
-        this.status.row = 1;
-        this.power *= POWER_FROZEN_ROCK;
+        this.status.row = 2;
+        this.power *= POWER_FLASH_ROCK;
     }
 
     @Override
@@ -37,7 +40,6 @@ public class RockFrozen extends Rock {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getRocket().inflictIce();
+        this.view.getRocket().inflictStun();
     }
-
 }

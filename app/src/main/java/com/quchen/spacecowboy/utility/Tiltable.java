@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.utility;
 
 /**
  * This interface needs to be implemented to use the tiltsensor

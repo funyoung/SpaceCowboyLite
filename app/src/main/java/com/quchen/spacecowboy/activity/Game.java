@@ -24,13 +24,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.quchen.spacecowboy.AccomplishmentsBox;
+import com.quchen.spacecowboy.utility.AccomplishmentsBox;
 import com.quchen.spacecowboy.GameView;
 import com.quchen.spacecowboy.R;
-import com.quchen.spacecowboy.TiltSensor;
-import com.quchen.spacecowboy.TimerExec;
-import com.quchen.spacecowboy.TimerExecTask;
-import com.quchen.spacecowboy.Util;
+import com.quchen.spacecowboy.utility.TiltSensor;
+import com.quchen.spacecowboy.utility.TimerExec;
+import com.quchen.spacecowboy.utility.TimerExecTask;
+import com.quchen.spacecowboy.utility.Util;
 
 public class Game extends AbstractMainActivity implements OnTouchListener {
 

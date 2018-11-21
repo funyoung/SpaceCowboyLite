@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.utility;
 /**
  * A Timer that can pause and resume
  * All timers are stored in a list so they can be paused and resume at the ~same time
@@ -13,14 +13,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TimerExec {
-    static List<TimerExec> allTimers = new ArrayList<TimerExec>();
-    private volatile boolean isRunning = false;
-    private volatile boolean isPaused = false;
+    public static List<TimerExec> allTimers = new ArrayList<>();
+    private volatile boolean isRunning;
+    private volatile boolean isPaused;
     private volatile long interval;
     private long elapsedTime;
     private volatile long duration;
-    private ScheduledExecutorService execService = Executors.newSingleThreadScheduledExecutor();
-    private Future<?> future = null;
+    private final ScheduledExecutorService execService = Executors.newSingleThreadScheduledExecutor();
+    private Future<?> future;
     private TimerExecTask task;
 
     public TimerExec() {
@@ -44,78 +44,78 @@ public class TimerExec {
         this.interval = interval;
         this.duration = duration;
         this.task = task;
-        this.elapsedTime = 0;
+        elapsedTime = 0;
 
-        allTimers.add(this);
+        TimerExec.allTimers.add(this);
     }
 
 
     public static void stopAllTimers() {
-        for (TimerExec t : allTimers) {
+        for (TimerExec t : TimerExec.allTimers) {
             t.cancel();
         }
-        allTimers.clear();
+        TimerExec.allTimers.clear();
     }
 
     public void start() {
-        if (isRunning) {
+        if (this.isRunning) {
             return;
         }
-        isRunning = true;
-        isPaused = false;
-        future = execService.scheduleWithFixedDelay(new Runnable() {
+        this.isRunning = true;
+        this.isPaused = false;
+        this.future = this.execService.scheduleWithFixedDelay(new Runnable() {
             @Override
             public void run() {
-                task.onTick();
-                elapsedTime += interval;
-                if (duration > 0) {    // -1 = infinity
-                    if (elapsedTime >= duration) {
-                        future.cancel(false);
-                        task.onFinish();
+                TimerExec.this.task.onTick();
+                TimerExec.this.elapsedTime += TimerExec.this.interval;
+                if (TimerExec.this.duration > 0) {    // -1 = infinity
+                    if (TimerExec.this.elapsedTime >= TimerExec.this.duration) {
+                        TimerExec.this.future.cancel(false);
+                        TimerExec.this.task.onFinish();
                     }
                 }
             }
 
-        }, interval, interval, TimeUnit.MILLISECONDS);
+        }, this.interval, this.interval, TimeUnit.MILLISECONDS);
     }
 
     public void pause() {
-        if (!isRunning) {
+        if (!this.isRunning) {
             return;
         }
-        future.cancel(false);
-        isRunning = false;
-        isPaused = true;
+        this.future.cancel(false);
+        this.isRunning = false;
+        this.isPaused = true;
     }
 
     public void resume() {
-        if (!isPaused) {
+        if (!this.isPaused) {
             return;
         }
-        start();
+        this.start();
     }
 
     public void cancel() {
-        pause();
-        elapsedTime = 0;
-        isPaused = false;
+        this.pause();
+        this.elapsedTime = 0;
+        this.isPaused = false;
     }
 
     public void setTimer(TimerExecTask task, long interval, long duration) {
         this.interval = interval;
         this.duration = duration;
         this.task = task;
-        this.elapsedTime = 0;
+        elapsedTime = 0;
     }
 
     public long getElapsedTime() {
-        return elapsedTime;
+        return this.elapsedTime;
     }
 
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        allTimers.remove(this);
+        TimerExec.allTimers.remove(this);
     }
 
 }

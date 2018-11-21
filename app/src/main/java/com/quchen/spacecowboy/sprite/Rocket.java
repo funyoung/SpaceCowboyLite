@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite;
 /**
  * The player
  *
@@ -8,6 +8,11 @@ package com.quchen.spacecowboy;
 import android.content.Context;
 import android.graphics.Canvas;
 
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.utility.TimerExec;
+import com.quchen.spacecowboy.utility.TimerExecTask;
+import com.quchen.spacecowboy.utility.Util;
 import com.quchen.spacecowboy.activity.Game;
 
 public class Rocket extends Sprite {

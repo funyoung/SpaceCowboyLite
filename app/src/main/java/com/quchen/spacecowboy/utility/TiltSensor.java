@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.utility;
 /**
  * Uses the orientationsensor to detect whether the device is tilted
  *

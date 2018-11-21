@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.rock;
 /**
  * A Meteorite that damages the player
  *
@@ -8,6 +8,11 @@ package com.quchen.spacecowboy;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.sprite.Sprite;
 
 public class Rock extends Sprite {
     public static final byte POWER_ROCK = 1;

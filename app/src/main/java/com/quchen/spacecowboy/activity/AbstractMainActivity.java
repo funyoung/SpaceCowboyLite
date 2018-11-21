@@ -3,7 +3,7 @@ package com.quchen.spacecowboy.activity;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 
-import com.quchen.spacecowboy.Util;
+import com.quchen.spacecowboy.utility.Util;
 
 class AbstractMainActivity extends FragmentActivity {
 

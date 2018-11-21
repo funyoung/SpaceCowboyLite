@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.cow;
 /**
  * Maincow
  *
@@ -7,6 +7,11 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.sprite.Sprite;
+import com.quchen.spacecowboy.utility.Util;
 
 public class Cow extends Sprite {
     public static final int COW_TYPE = 0;

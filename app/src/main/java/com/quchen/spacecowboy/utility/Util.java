@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.utility;
 /**
  * Holds same variables and constants
  * Holds the player for the background music
@@ -12,6 +12,8 @@ import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+
+import com.quchen.spacecowboy.R;
 
 public class Util {
     //---------------------------------------------

@@ -11,9 +11,9 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.quchen.spacecowboy.R;
-import com.quchen.spacecowboy.TiltSensor;
-import com.quchen.spacecowboy.Tiltable;
-import com.quchen.spacecowboy.Util;
+import com.quchen.spacecowboy.utility.TiltSensor;
+import com.quchen.spacecowboy.utility.Tiltable;
+import com.quchen.spacecowboy.utility.Util;
 
 public class SensorKalibrierung extends Activity implements Tiltable {
 

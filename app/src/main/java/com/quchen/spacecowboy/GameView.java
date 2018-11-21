@@ -17,6 +17,28 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.quchen.spacecowboy.activity.Game;
+import com.quchen.spacecowboy.sprite.BackGround;
+import com.quchen.spacecowboy.sprite.Rocket;
+import com.quchen.spacecowboy.sprite.cow.Cow;
+import com.quchen.spacecowboy.sprite.cow.CowDance;
+import com.quchen.spacecowboy.sprite.cow.CowFat;
+import com.quchen.spacecowboy.sprite.cow.CowGhost;
+import com.quchen.spacecowboy.sprite.cow.CowOld;
+import com.quchen.spacecowboy.sprite.cow.CowZombie;
+import com.quchen.spacecowboy.sprite.powerup.Coin;
+import com.quchen.spacecowboy.sprite.powerup.Coin5;
+import com.quchen.spacecowboy.sprite.powerup.PowerUp;
+import com.quchen.spacecowboy.sprite.powerup.PowerUpBell;
+import com.quchen.spacecowboy.sprite.powerup.PowerUpMilkContainer;
+import com.quchen.spacecowboy.sprite.powerup.PowerUpNitrokaese;
+import com.quchen.spacecowboy.sprite.rock.Rock;
+import com.quchen.spacecowboy.sprite.rock.RockFat;
+import com.quchen.spacecowboy.sprite.rock.RockFlash;
+import com.quchen.spacecowboy.sprite.rock.RockFrozen;
+import com.quchen.spacecowboy.sprite.rock.RockGuided;
+import com.quchen.spacecowboy.utility.Tiltable;
+import com.quchen.spacecowboy.utility.TimerExec;
+import com.quchen.spacecowboy.utility.Util;
 
 import java.util.ArrayList;
 import java.util.List;

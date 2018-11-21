@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite;
 /**
  * The shield that the ghost cow provides
  *
@@ -6,6 +6,10 @@ package com.quchen.spacecowboy;
  */
 
 import android.content.Context;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.sprite.Sprite;
 
 public class Shield extends Sprite {
     public static final byte NUMBER_OF_ROWS = 1;

@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.powerup;
 /**
  * A cheese that slows down everything except the player himself
  * Cheese = Kaese (german)
@@ -8,6 +8,12 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.utility.TimerExec;
+import com.quchen.spacecowboy.utility.TimerExecTask;
+import com.quchen.spacecowboy.utility.Util;
 
 public class PowerUpNitrokaese extends PowerUp {
     public static final int TIME_NITRO = 5000;

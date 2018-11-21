@@ -12,9 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.quchen.spacecowboy.AccomplishmentsBox;
+import com.quchen.spacecowboy.utility.AccomplishmentsBox;
 import com.quchen.spacecowboy.R;
-import com.quchen.spacecowboy.Util;
+import com.quchen.spacecowboy.utility.Util;
 
 public class HighscoreOffline extends Activity {
 

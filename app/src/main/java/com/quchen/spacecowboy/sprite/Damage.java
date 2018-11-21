@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite;
 /**
  * Provides a milksplash effect when hit
  *
@@ -7,6 +7,9 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
 
 public class Damage extends Sprite {
     public static final byte NUMBER_OF_ROWS = 2;

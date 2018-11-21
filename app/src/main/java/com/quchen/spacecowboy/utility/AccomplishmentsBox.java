@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.utility;
 /**
  * Class to store all accomplishments.
  *
@@ -72,9 +72,9 @@ public class AccomplishmentsBox {
     volatile boolean meteoroids_shield_10 = false;
     volatile boolean lvl_10_10_milkcontainer = false;
     volatile boolean red_coin = false;
-    volatile boolean leet_king = false;
+    public volatile boolean leet_king = false;
     volatile boolean catched_them_all_bool = false;
-    volatile int catch_them_all = 0;
+    public volatile int catch_them_all = 0;
     public volatile int score = 0;
     public volatile int cows = 0;
     public volatile int meteoroids = 0;

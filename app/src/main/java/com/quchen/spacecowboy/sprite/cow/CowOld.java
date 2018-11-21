@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.cow;
 /**
  * Cow that varies in speed and direction
  *
@@ -7,6 +7,10 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.sprite.cow.Cow;
 
 public class CowOld extends Cow {
     public static final int COW_TYPE = 2;

@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.sprite.powerup;
 /**
  * A Milkcontainer that raises the max milk amount
  *
@@ -7,6 +7,10 @@ package com.quchen.spacecowboy;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.sprite.powerup.PowerUp;
 
 public class PowerUpMilkContainer extends PowerUp {
     public static final byte MILK_CONTAINER_MAX_INCREASE = 5;
