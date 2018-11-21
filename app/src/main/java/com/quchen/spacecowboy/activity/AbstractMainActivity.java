@@ -1,7 +1,9 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.activity;
 
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
+
+import com.quchen.spacecowboy.Util;
 
 class AbstractMainActivity extends FragmentActivity {
 
@@ -38,17 +40,19 @@ class AbstractMainActivity extends FragmentActivity {
     }
 
     private void stop() {
-        if(Util.musicPlayer != null){
+        if (Util.musicPlayer != null) {
             Util.musicPlayer.stop();
         }
     }
+
     private void start() {
-        if(Util.musicPlayer != null){
+        if (Util.musicPlayer != null) {
             Util.musicPlayer.start();
         }
     }
+
     private void pause() {
-        if(Util.musicPlayer != null){
+        if (Util.musicPlayer != null) {
             Util.musicPlayer.pause();
         }
     }

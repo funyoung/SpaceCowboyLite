@@ -1,7 +1,8 @@
-package com.quchen.spacecowboy;
+package com.quchen.spacecowboy.activity;
 /**
  * Gameover Dialog
  * with points and the ability to upload accomblishments or save local
+ *
  * @author lars
  */
 //import com.google.android.gms.games.GamesClient;
@@ -12,36 +13,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.quchen.spacecowboy.AccomplishmentsBox;
+import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.Util;
+
 public class AddScore extends FragmentActivity {
-	
-	private Button okButton;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.addscore);
-		
-		TextView tvPoints = findViewById(R.id.points);
-		tvPoints.setText(getResources().getString(R.string.yourScoreIs) + ": " + this.getIntent().getExtras().getInt("points")
-				+ "\nSee you Space Cowboy");
-		tvPoints.setTextSize(Util.getTextSize());
 
-		okButton = findViewById(R.id.bok);
-		okButton.setTextSize(Util.getTextSize());
-		okButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AccomplishmentsBox.setLocal(Game.theGame.getAccomplishments(), AddScore.this);
-				if(false/*getGameHelper().isSignedIn()*/){
+    private Button okButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.addscore);
+
+        TextView tvPoints = findViewById(R.id.points);
+        tvPoints.setText(getResources().getString(R.string.yourScoreIs) + ": " + this.getIntent().getExtras().getInt("points")
+                + "\nSee you Space Cowboy");
+        tvPoints.setTextSize(Util.getTextSize());
+
+        okButton = findViewById(R.id.bok);
+        okButton.setTextSize(Util.getTextSize());
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AccomplishmentsBox.setLocal(Game.theGame.getAccomplishments(), AddScore.this);
+                if (false/*getGameHelper().isSignedIn()*/) {
 //					submitScore(AddScore.this, Game.theGame.getAccomplishments(), AddScore.this.mHelper.getGamesClient());
-				}else{
-					AccomplishmentsBox.savesAreOffline(AddScore.this);
-				}
+                } else {
+                    AccomplishmentsBox.savesAreOffline(AddScore.this);
+                }
 
-				finish();
-			}
-		});
-	}
+                finish();
+            }
+        });
+    }
 
 //	/**
 //	 * Publishes the accomplishments online with google play services
@@ -133,22 +138,22 @@ public class AddScore extends FragmentActivity {
 //
 //		Toast.makeText(activity.getApplicationContext(), "Uploaded", Toast.LENGTH_SHORT).show();
 //	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if(Util.musicPlayer != null){
-			Util.musicPlayer.start();
-		}
-	}
 
-	@Override
-	protected void onPause() {
-		if(Util.musicPlayer != null){
-			Util.musicPlayer.pause();
-		}
-		super.onPause();
-	}
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Util.musicPlayer != null) {
+            Util.musicPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (Util.musicPlayer != null) {
+            Util.musicPlayer.pause();
+        }
+        super.onPause();
+    }
 
 //	@Override
 //	public void onSignInFailed() {}

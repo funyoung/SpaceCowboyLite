@@ -18,7 +18,7 @@
               <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>-->
 
         <activity
-            android:name=".Help"
+            android:name=".activity.Help"
             android:label="@string/title_activity_main"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -28,7 +28,7 @@
         </activity>
         
         <activity
-            android:name=".Shop"
+            android:name=".activity.Shop"
             android:label="@string/title_activity_main"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -38,7 +38,7 @@
         </activity>
         
         <activity
-            android:name=".Config"
+            android:name=".activity.Config"
             android:label="@string/title_activity_main"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -48,7 +48,7 @@
         </activity>
         
         <activity
-            android:name=".Game"
+            android:name=".activity.Game"
             android:label="@string/title_activity_main"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:screenOrientation="landscape" >
@@ -63,7 +63,7 @@
         </activity>
         
         <activity
-            android:name=".SensorKalibrierung"
+            android:name=".activity.SensorKalibrierung"
             android:label="@string/title_activity_main"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -73,7 +73,7 @@
         </activity>
         
         <activity
-            android:name=".AddScore"
+            android:name=".activity.AddScore"
             android:label="@string/title_activity_main"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -83,7 +83,7 @@
         </activity>
 
         <activity
-            android:name=".HighscoreOffline"
+            android:name=".activity.HighscoreOffline"
             android:label="@string/title_activity_main"
             android:screenOrientation="landscape" >
             <intent-filter>
