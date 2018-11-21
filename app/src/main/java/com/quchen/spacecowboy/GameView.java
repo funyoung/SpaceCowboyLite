@@ -5,8 +5,6 @@ package com.quchen.spacecowboy;
  * Gets the tiltevents.
  * @author lars
  */
-import java.util.ArrayList;
-import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,9 +12,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameView extends SurfaceView implements Runnable, Tiltable{
 	public static final byte POWER_ICE = 6; // speed / power

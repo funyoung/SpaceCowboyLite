@@ -5,7 +5,6 @@ package com.quchen.spacecowboy;
  * @author lars
  */
 //import com.google.android.gms.games.GamesClient;
-import com.google.example.games.basegameutils.GameActivity;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -24,7 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Game extends GameActivity implements OnTouchListener{
+public class Game extends AbstractMainActivity implements OnTouchListener{
 	
 	/**
 	 * Makes the game instance accessible for everyone
@@ -65,13 +64,19 @@ public class Game extends GameActivity implements OnTouchListener{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		setDisplaySpecs();
+
 		super.onCreate(savedInstanceState);
+
+		setupEvironment();
+
 		System.gc();
 		try {
 			Thread.sleep(50);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
 		theGame = this;
 		setUpGameSettings();
 
