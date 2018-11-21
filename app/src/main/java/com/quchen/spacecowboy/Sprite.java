@@ -106,7 +106,7 @@ public abstract class Sprite {
 	}
 
 	public void draw(Canvas canvas){
-		// Sprite außerhalb des sichtbaren Bereichs
+		// Sprite auerhalb des sichtbaren Bereichs
 		if(this.x > Util.PIXEL_WIDTH || this.y > Util.PIXEL_HEIGHT
 				|| this.x + this.width < 0 || this.y + this.height < 0){
 			return;

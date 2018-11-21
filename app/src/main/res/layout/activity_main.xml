@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/menu" >
 
-    <com.google.ads.AdView
-        android:id="@+id/ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="a1505b713fa68b8"
-        ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, TEST_DEVICE_ID" />
+    <!--<com.google.ads.AdView-->
+        <!--android:id="@+id/ad"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--ads:adSize="BANNER"-->
+        <!--ads:adUnitId="a1505b713fa68b8"-->
+        <!--ads:loadAdOnCreate="true"-->
+        <!--ads:testDevices="TEST_EMULATOR, TEST_DEVICE_ID" />-->
 
     <ImageButton
         android:id="@+id/settingsButton"
@@ -98,12 +98,12 @@
         android:layout_centerVertical="true"
         android:src="@drawable/shop" />
 
-	<com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+	<!--<com.google.android.gms.common.SignInButton-->
+        <!--android:id="@+id/sign_in_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
     
     <Button
         android:id="@+id/sign_out_button"

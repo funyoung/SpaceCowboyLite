@@ -4,11 +4,14 @@ package com.quchen.spacecowboy;
  * Provides buttons to settings, highscore, gamestart, ...
  * @author lars
  */
-import com.google.android.gms.common.SignInButton;
 import com.google.example.games.basegameutils.GameActivity;
+import com.quchen.spacecowboy.R.drawable;
+import com.quchen.spacecowboy.R.id;
+import com.quchen.spacecowboy.R.layout;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -25,119 +28,130 @@ public class MainActivity extends GameActivity {
 	private ImageButton playButton;
 	private ImageButton shopButton;
 	private Button about;
-	private SignInButton signInButton;
+//	private SignInButton signInButton;
 	private Button signOutButton;
 	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setDisplaySpecs();
-		setContentView(R.layout.activity_main);
-		setUp();
+		this.setDisplaySpecs();
+		this.setContentView(layout.activity_main);
+		this.setUp();
 		Config.readVolume(this);
 		Util.initMusicPlayer(this);
 		Util.musicPlayer.start();
 	}
 	
 	private void setDisplaySpecs(){
-		Util.DENSITY = getResources().getDisplayMetrics().density;
-		Util.DISPLAX_SIZE = getResources().getDisplayMetrics().heightPixels / getResources().getDisplayMetrics().densityDpi;
-		Util.PIXEL_HEIGHT = getResources().getDisplayMetrics().heightPixels;
-		Util.PIXEL_WIDTH = getResources().getDisplayMetrics().widthPixels;
-		Util.ORIENTATION = getWindow().getWindowManager().getDefaultDisplay().getRotation();
+		Util.DENSITY = this.getResources().getDisplayMetrics().density;
+		Util.DISPLAX_SIZE = this.getResources().getDisplayMetrics().heightPixels / this.getResources().getDisplayMetrics().densityDpi;
+		Util.PIXEL_HEIGHT = this.getResources().getDisplayMetrics().heightPixels;
+		Util.PIXEL_WIDTH = this.getResources().getDisplayMetrics().widthPixels;
+		Util.ORIENTATION = this.getWindow().getWindowManager().getDefaultDisplay().getRotation();
 	}
 	
 	private void setUp(){
-		exitButton = (ImageButton)findViewById(R.id.exitButton);
-		exitButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.exit_button)));
-		exitButton.setOnClickListener(new View.OnClickListener() {	
+		this.exitButton = this.findViewById(id.exitButton);
+		this.exitButton.setImageBitmap(Sprite.createBitmap(this.getResources().getDrawable(drawable.exit_button)));
+		this.exitButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				finish();
+				MainActivity.this.finish();
 			}
 		});
-		
-		helpButton = (ImageButton)findViewById(R.id.helpButton);
-		helpButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.help_button)));
-		helpButton.setOnClickListener(new View.OnClickListener() {	
+
+		this.helpButton = this.findViewById(id.helpButton);
+		this.helpButton.setImageBitmap(Sprite.createBitmap(this.getResources().getDrawable(drawable.help_button)));
+		this.helpButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				startActivity(new Intent("com.quchen.spacecowboy.Help"));
+				MainActivity.this.startActivity(new Intent("com.quchen.spacecowboy.Help"));
 			}
 		});
-		
-		highscoreButton = (ImageButton)findViewById(R.id.highscoreButton);
-		highscoreButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.highscore)));
-		highscoreButton.setOnClickListener(new View.OnClickListener() {	
+
+		this.highscoreButton = this.findViewById(id.highscoreButton);
+		this.highscoreButton.setImageBitmap(Sprite.createBitmap(this.getResources().getDrawable(drawable.highscore)));
+		this.highscoreButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				startActivityForResult(MainActivity.this.mHelper.getGamesClient().getLeaderboardIntent(
-						getResources().getString(R.string.leaderboard_space_cowboy)), 0);
-				startActivity(MainActivity.this.mHelper.getGamesClient().getAllLeaderboardsIntent());
+//				startActivityForResult(MainActivity.this.mHelper.getGamesClient().getLeaderboardIntent(
+//						getResources().getString(R.string.leaderboard_space_cowboy)), 0);
+//				startActivity(MainActivity.this.mHelper.getGamesClient().getAllLeaderboardsIntent());
 			}
 		});
-		
-		highscoreButtonOffline = (ImageButton)findViewById(R.id.highscoreButtonOffline);
-		highscoreButtonOffline.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.highscore)));
-		highscoreButtonOffline.setOnClickListener(new View.OnClickListener() {	
+
+		this.highscoreButtonOffline = this.findViewById(id.highscoreButtonOffline);
+		this.highscoreButtonOffline.setImageBitmap(Sprite.createBitmap(this.getResources().getDrawable(drawable.highscore)));
+		this.highscoreButtonOffline.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				startActivity(new Intent("com.quchen.spacecowboy.HighscoreOffline"));
+				MainActivity.this.startActivity(new Intent("com.quchen.spacecowboy.HighscoreOffline"));
 			}
 		});
-		
-		shopButton = (ImageButton)findViewById(R.id.shopButton);
-		shopButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.shop)));
-		shopButton.setOnClickListener(new View.OnClickListener() {	
+
+		this.shopButton = this.findViewById(id.shopButton);
+		this.shopButton.setImageBitmap(Sprite.createBitmap(this.getResources().getDrawable(drawable.shop)));
+		this.shopButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				startActivity(new Intent("com.quchen.spacecowboy.Shop"));
+				MainActivity.this.startActivity(new Intent("com.quchen.spacecowboy.Shop"));
 			}
 		});
-		
-		achievementButton = (ImageButton)findViewById(R.id.achievementButton);
-		achievementButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.achievement_button)));
-		achievementButton.setOnClickListener(new View.OnClickListener() {	
+
+		this.achievementButton = this.findViewById(id.achievementButton);
+		this.achievementButton.setImageBitmap(Sprite.createBitmap(this.getResources().getDrawable(drawable.achievement_button)));
+		this.achievementButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				startActivityForResult(MainActivity.this.mHelper.getGamesClient().getAchievementsIntent(),0);
+//				startActivityForResult(MainActivity.this.mHelper.getGamesClient().getAchievementsIntent(),0);
 			}
 		});
-		
-		settingsButton = (ImageButton)findViewById(R.id.settingsButton);
-		settingsButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.config_button)));
-		settingsButton.setOnClickListener(new View.OnClickListener() {	
+
+		this.settingsButton = this.findViewById(id.settingsButton);
+		this.settingsButton.setImageBitmap(Sprite.createBitmap(this.getResources().getDrawable(drawable.config_button)));
+		this.settingsButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				startActivity(new Intent("com.quchen.spacecowboy.Config"));
+				MainActivity.this.startActivity(new Intent("com.quchen.spacecowboy.Config"));
 			}
 		});
-		
-		playButton = (ImageButton)findViewById(R.id.playButton);
-		playButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.play_button)));
-		playButton.setOnClickListener(new View.OnClickListener() {	
+
+		this.playButton = this.findViewById(id.playButton);
+		this.playButton.setImageBitmap(Sprite.createBitmap(this.getResources().getDrawable(drawable.play_button)));
+		this.playButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				startActivity(new Intent("com.quchen.spacecowboy.Game"));
+				MainActivity.this.startActivity(new Intent("com.quchen.spacecowboy.Game"));
 			}
 		});
-		
-		about = (Button)findViewById(R.id.about);
-		about.setTextSize(Util.getTextSize());
-		about.setOnClickListener(new View.OnClickListener() {
+
+		this.about = this.findViewById(id.about);
+		this.about.setTextSize(Util.getTextSize());
+		this.about.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				startActivity(new Intent("com.quchen.spacecowboy.About"));
+				MainActivity.this.startActivity(new Intent("com.quchen.spacecowboy.About"));
 			}
 		});
-		
-		signInButton = (SignInButton)findViewById(R.id.sign_in_button);
-		signInButton.setOnClickListener(new View.OnClickListener() {
+
+//		signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+//		signInButton.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				beginUserInitiatedSignIn();
+//			}
+//		});
+
+		this.signOutButton = this.findViewById(id.sign_out_button);
+		this.signOutButton.setTextSize(Util.getTextSize());
+		this.signOutButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
-				beginUserInitiatedSignIn();
+//				signOut();
+				MainActivity.this.showOfflineButtons();
 			}
 		});
-		
-		signOutButton = (Button)findViewById(R.id.sign_out_button);
-		signOutButton.setTextSize(Util.getTextSize());
-		signOutButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				signOut();
-				showOfflineButtons();
-			}
-		}); 
 	}
 
 	@Override
@@ -154,7 +168,7 @@ public class MainActivity extends GameActivity {
 		if(Util.musicPlayer != null){
 			Util.musicPlayer.start();
 		}
-		
+
 	}
 
 	@Override
@@ -165,36 +179,36 @@ public class MainActivity extends GameActivity {
 		super.onPause();
 	}
 
-	@Override
-	public void onSignInFailed() {
-		showOfflineButtons();		
-		Toast.makeText(getApplicationContext(), "Not signed in", Toast.LENGTH_SHORT).show();
-	}
+//	@Override
+//	public void onSignInFailed() {
+//		showOfflineButtons();
+//		Toast.makeText(getApplicationContext(), "Not signed in", Toast.LENGTH_SHORT).show();
+//	}
+//
+//	@Override
+//	public void onSignInSucceeded() {
+//		Toast.makeText(getApplicationContext(), "Signed in", Toast.LENGTH_SHORT).show();
+//		showOnlineButtons();
+//		if(!AccomplishmentsBox.isOnline(this)){
+//			AddScore.submitScore(this, AccomplishmentsBox.getLocal(this), getGamesClient());
+//		}
+//	}
 
-	@Override
-	public void onSignInSucceeded() {
-		Toast.makeText(getApplicationContext(), "Signed in", Toast.LENGTH_SHORT).show();
-		showOnlineButtons();
-		if(!AccomplishmentsBox.isOnline(this)){
-			AddScore.submitScore(this, AccomplishmentsBox.getLocal(this), this.getGamesClient());
-		}
-	}
-	
-	private void showOnlineButtons(){
-		findViewById(R.id.achievementButton).setVisibility(View.VISIBLE);
-		findViewById(R.id.highscoreButton).setVisibility(View.VISIBLE);
-		findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-		findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
-		findViewById(R.id.sign_in_button_help_text).setVisibility(View.GONE);
-		findViewById(R.id.highscoreButtonOffline).setVisibility(View.GONE);
-	}
-	
+//	private void showOnlineButtons(){
+//		this.findViewById(id.achievementButton).setVisibility(View.VISIBLE);
+//		this.findViewById(id.highscoreButton).setVisibility(View.VISIBLE);
+//		this.findViewById(id.sign_in_button).setVisibility(View.GONE);
+//		this.findViewById(id.sign_out_button).setVisibility(View.VISIBLE);
+//		this.findViewById(id.sign_in_button_help_text).setVisibility(View.GONE);
+//		this.findViewById(id.highscoreButtonOffline).setVisibility(View.GONE);
+//	}
+
 	private void showOfflineButtons(){
-		findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-		findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-		findViewById(R.id.achievementButton).setVisibility(View.GONE);
-		findViewById(R.id.highscoreButton).setVisibility(View.GONE);
-		findViewById(R.id.sign_in_button_help_text).setVisibility(View.VISIBLE);
-		findViewById(R.id.highscoreButtonOffline).setVisibility(View.VISIBLE);
+//		this.findViewById(id.sign_in_button).setVisibility(View.VISIBLE);
+		this.findViewById(id.sign_out_button).setVisibility(View.GONE);
+		this.findViewById(id.achievementButton).setVisibility(View.GONE);
+		this.findViewById(id.highscoreButton).setVisibility(View.GONE);
+		this.findViewById(id.sign_in_button_help_text).setVisibility(View.VISIBLE);
+		this.findViewById(id.highscoreButtonOffline).setVisibility(View.VISIBLE);
 	}
 }
