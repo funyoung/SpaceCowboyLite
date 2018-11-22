@@ -2,6 +2,7 @@ package com.quchen.spacecowboy.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 
 import com.quchen.spacecowboy.R;
@@ -417,5 +418,17 @@ public class GameViewModel {
                 + "\t\t\t\t\t\t" + "LVL: " + Util.lvl
                 + "\t\t\t\t\t\t" + "Coins: " + AccomplishmentsBox.instance().score);
 
+    }
+
+    public void gameOver() {
+        if (AccomplishmentsBox.instance().score == 1337) {
+            AccomplishmentsBox.instance().leet_king = true;
+        }
+
+        // todo: 没有此Activity了。
+        Intent intent = new Intent("com.quchen.spacecowboy.activity.AddScore");
+        intent.putExtra("points", AccomplishmentsBox.instance().score);
+        activity.startActivity(intent);
+        activity.finish();
     }
 }

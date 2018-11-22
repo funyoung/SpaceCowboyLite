@@ -22,7 +22,6 @@ import com.quchen.spacecowboy.utility.TimerExec;
 import com.quchen.spacecowboy.utility.Util;
 
 public class GameView extends SurfaceView implements Runnable, Tiltable {
-    private Game game;
     private Thread t;
     private SurfaceHolder holder;
 
@@ -53,7 +52,6 @@ public class GameView extends SurfaceView implements Runnable, Tiltable {
      */
     public GameView(Activity activity) {
         super(activity);
-        this.game = (Game) activity;
         this.shouldRun = true;
         holder = getHolder();
 
@@ -140,15 +138,7 @@ public class GameView extends SurfaceView implements Runnable, Tiltable {
     }
 
     private void gameOver() {
-        if (AccomplishmentsBox.instance().score == 1337) {
-            AccomplishmentsBox.instance().leet_king = true;
-        }
-
-        // todo: 没有此Activity了。
-        Intent intent = new Intent("com.quchen.spacecowboy.activity.AddScore");
-        intent.putExtra("points", AccomplishmentsBox.instance().score);
-        this.game.startActivity(intent);
-        this.game.finish();
+        viewModel.gameOver();
         this.shouldRun = false;
     }
 
