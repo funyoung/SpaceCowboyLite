@@ -8,8 +8,9 @@ package com.quchen.spacecowboy.sprite;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class Damage extends Sprite {
     public static final byte NUMBER_OF_ROWS = 2;
@@ -18,8 +19,8 @@ public class Damage extends Sprite {
     protected static Bitmap globalBitmap;
     private byte TimeOutCounter;
 
-    public Damage(GameView view, Context context) {
-        super(view, context);
+    public Damage(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
 
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.damage));

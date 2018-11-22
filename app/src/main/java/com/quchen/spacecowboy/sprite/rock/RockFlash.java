@@ -8,17 +8,19 @@ package com.quchen.spacecowboy.sprite.rock;
 import android.content.Context;
 import android.graphics.Canvas;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.sprite.Status;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class RockFlash extends Rock {
     public static final byte POWER_FLASH_ROCK = 1;
 
     private Status status;
 
-    public RockFlash(GameView view, Context context) {
-        super(view, context);
-        this.status = new Status(view, context);
+    public RockFlash(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
+        this.status = new Status(view, context, viewModel);
         this.status.row = 2;
         this.power *= POWER_FLASH_ROCK;
     }
@@ -40,6 +42,6 @@ public class RockFlash extends Rock {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getRocket().inflictStun();
+        viewModel.getRocket().inflictStun();
     }
 }

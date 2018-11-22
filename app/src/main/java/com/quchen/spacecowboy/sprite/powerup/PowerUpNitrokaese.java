@@ -9,11 +9,12 @@ package com.quchen.spacecowboy.sprite.powerup;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.TimerExec;
 import com.quchen.spacecowboy.utility.TimerExecTask;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class PowerUpNitrokaese extends PowerUp {
     public static final int TIME_NITRO = 5000;
@@ -22,8 +23,9 @@ public class PowerUpNitrokaese extends PowerUp {
     protected static Bitmap globalBitmap;
     static private TimerExec nitroTimer;
 
-    public PowerUpNitrokaese(GameView view, Context context) {
-        super(view, context);
+    public PowerUpNitrokaese(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.nitrokaese));
         }
@@ -36,15 +38,15 @@ public class PowerUpNitrokaese extends PowerUp {
     @Override
     public void onCollision() {
         super.onCollision();
-        view.setNPCSpeedModifier(0.1f);
-        view.getGame().showToast(view.getResources().getString(R.string.ToastNitroOn));
+        viewModel.setNPCSpeedModifier(0.1f);
+        viewModel.showToast((R.string.ToastNitroOn));
 
         nitroTimer.cancel();
         nitroTimer.setTimer(new TimerExecTask() {
             @Override
             public void onFinish() {
-                view.resetNPCSpeedModifier();
-                view.getGame().showToast(view.getResources().getString(R.string.ToastNitroOff));
+                viewModel.resetNPCSpeedModifier();
+                viewModel.showToast((R.string.ToastNitroOff));
             }
 
             @Override

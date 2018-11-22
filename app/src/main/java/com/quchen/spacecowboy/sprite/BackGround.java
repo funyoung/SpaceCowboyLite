@@ -5,8 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 /**
  * Background
@@ -15,8 +16,9 @@ import com.quchen.spacecowboy.R;
  */
 public class BackGround extends Sprite {
 
-    public BackGround(GameView view, Context context) {
-        super(view, context);
+    public BackGround(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         BitmapDrawable bd = (BitmapDrawable) context.getResources().getDrawable(R.drawable.bg1);
         this.bitmap = bd.getBitmap();
         this.width = this.bitmap.getWidth();

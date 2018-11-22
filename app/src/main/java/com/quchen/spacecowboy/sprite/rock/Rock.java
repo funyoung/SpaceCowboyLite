@@ -9,10 +9,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.Util;
 import com.quchen.spacecowboy.sprite.Sprite;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class Rock extends Sprite {
     public static final byte POWER_ROCK = 1;
@@ -24,8 +25,8 @@ public class Rock extends Sprite {
     private static Bitmap globalBitmap;
     protected int life;
 
-    public Rock(GameView view, Context context) {
-        super(view, context);
+    public Rock(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.rock1));
         }
@@ -43,8 +44,9 @@ public class Rock extends Sprite {
         this.speedY = this.speedY * 5 / 3;
     }
 
-    public Rock(GameView view, Context context, int posX, int posY, int speedX, int speedY) {
-        this(view, context);
+    public Rock(GameView view, Context context, GameViewModel viewModel,
+                int posX, int posY, int speedX, int speedY) {
+        this(view, context, viewModel);
         this.x = posX;
         this.y = posY;
         this.speedX = speedX;
@@ -72,10 +74,10 @@ public class Rock extends Sprite {
     protected void onKill() {
         this.isTimedOut = true;
         if ((int) (Math.random() * 10) < 1) {
-            this.view.createNewPowerUp(this.x, this.y);
+            viewModel.createNewPowerUp(this.x, this.y);
         }
 
-        this.view.getGame().killedMeteorid();
+        viewModel.killedMeteorid();
     }
 
     @Override
@@ -86,7 +88,7 @@ public class Rock extends Sprite {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getRocket().inflictDamage(this.power);
+        viewModel.getRocket().inflictDamage(this.power);
         this.isTimedOut = true;
     }
 

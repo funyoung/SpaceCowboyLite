@@ -3,6 +3,7 @@ package com.quchen.spacecowboy.activity;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 
+import com.quchen.spacecowboy.view.Option;
 import com.quchen.spacecowboy.utility.Util;
 
 class AbstractMainActivity extends FragmentActivity {
@@ -35,7 +36,7 @@ class AbstractMainActivity extends FragmentActivity {
     }
 
     protected void setupEvironment() {
-        Config.readVolume(this);
+        Option.readVolume(this);
         Util.initMusicPlayer(this);
     }
 

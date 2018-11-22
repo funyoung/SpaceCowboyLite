@@ -8,17 +8,19 @@ package com.quchen.spacecowboy.sprite.rock;
 import android.content.Context;
 import android.graphics.Canvas;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.sprite.Status;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class RockFrozen extends Rock {
     public static final byte POWER_FROZEN_ROCK = 1;
 
     private Status status;
 
-    public RockFrozen(GameView view, Context context) {
-        super(view, context);
-        this.status = new Status(view, context);
+    public RockFrozen(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
+        this.status = new Status(view, context, viewModel);
         this.status.row = 1;
         this.power *= POWER_FROZEN_ROCK;
     }
@@ -40,7 +42,7 @@ public class RockFrozen extends Rock {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getRocket().inflictIce();
+        viewModel.getRocket().inflictIce();
     }
 
 }

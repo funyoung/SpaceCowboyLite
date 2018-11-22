@@ -18,36 +18,6 @@
               <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>-->
 
         <activity
-            android:name=".activity.Help"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="com.quchen.spacecowboy.Help" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
-        <activity
-            android:name=".activity.Shop"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="com.quchen.spacecowboy.Shop" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
-        <activity
-            android:name=".activity.Config"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="com.quchen.spacecowboy.Config" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
-        <activity
             android:name=".activity.Game"
             android:label="@string/title_activity_main"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
@@ -61,37 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity
-            android:name=".activity.SensorKalibrierung"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="com.quchen.spacecowboy.SensorKalibrierung" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
-        <activity
-            android:name=".activity.AddScore"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="com.quchen.spacecowboy.AddScore" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
-        <activity
-            android:name=".activity.HighscoreOffline"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="com.quchen.spacecowboy.HighscoreOffline" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
     </application>
 
 </manifest>

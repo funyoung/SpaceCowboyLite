@@ -8,9 +8,12 @@ package com.quchen.spacecowboy.sprite.cow;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.AccomplishmentsBox;
+import com.quchen.spacecowboy.view.Achievement;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class CowDance extends Cow {
     public static final int COW_TYPE = 1;
@@ -21,8 +24,9 @@ public class CowDance extends Cow {
 
     protected static Bitmap globalBitmap;
 
-    public CowDance(GameView view, Context context) {
-        super(view, context);
+    public CowDance(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.dance_cow));
         }
@@ -37,17 +41,17 @@ public class CowDance extends Cow {
     @Override
     public void move(float speedModifier) {
         super.move(speedModifier);
-        this.speedX = this.view.getRocket().getSpeedX() / 2;
-        this.speedY = this.view.getRocket().getSpeedY() / 2;
+        this.speedX = viewModel.getRocket().getSpeedX() / 2;
+        this.speedY = viewModel.getRocket().getSpeedY() / 2;
     }
 
     @Override
     public void onCollision() {
         super.onCollision();
-        if (this.view.getRocket().isFrozen()) {
-            this.view.getGame().catchedDancecowFrozen();
+        if (viewModel.getRocket().isFrozen()) {
+            Achievement.getInstance().catchedDancecowFrozen();
         }
-        this.view.getGame().getAccomplishments().catch_them_all |= (1 << COW_TYPE);
+        AccomplishmentsBox.instance().catch_them_all |= (1 << COW_TYPE);
     }
 
 

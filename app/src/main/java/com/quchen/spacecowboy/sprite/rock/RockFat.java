@@ -8,9 +8,10 @@ package com.quchen.spacecowboy.sprite.rock;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class RockFat extends Rock {
     public static final byte FAT_ROCK_LIFE = 5;
@@ -21,8 +22,9 @@ public class RockFat extends Rock {
 
     private static Bitmap globalBitmap;
 
-    public RockFat(GameView view, Context context) {
-        super(view, context);
+    public RockFat(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.fat_rock));
         }
@@ -40,9 +42,10 @@ public class RockFat extends Rock {
     @Override
     protected void onKill() {
         super.onKill();
-        this.view.createNewRock(this.x, this.y);
-        this.view.createNewRock(this.x, this.y);
-        this.view.createNewRock(this.x, this.y);
+
+        for (int i = 0; i < 3; i++) {
+            viewModel.createNewRock(this.x, this.y);
+        }
     }
 
 

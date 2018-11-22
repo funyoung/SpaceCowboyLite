@@ -30,13 +30,5 @@
 			android:layout_height="wrap_content"
 			android:text="@string/no" />
 	</LinearLayout>
-	
-	<Button android:id="@+id/ingamemenuSettings"
-		android:textSize="30sp"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:layout_below="@id/ingamemenuLinearLayout"
-		android:text="@string/ingamemenuSettingsButton" />
 
 </RelativeLayout>

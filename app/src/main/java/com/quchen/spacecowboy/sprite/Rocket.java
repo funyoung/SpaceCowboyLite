@@ -8,12 +8,13 @@ package com.quchen.spacecowboy.sprite;
 import android.content.Context;
 import android.graphics.Canvas;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.Achievement;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.TimerExec;
 import com.quchen.spacecowboy.utility.TimerExecTask;
 import com.quchen.spacecowboy.utility.Util;
-import com.quchen.spacecowboy.activity.Game;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class Rocket extends Sprite {
     public static final int TIME_SHIELD = 5000;
@@ -31,23 +32,22 @@ public class Rocket extends Sprite {
     public static final byte STUN = 2;
     public static final byte SHIELD = 4;
 
-    private Game game;
     private TimerExec statusTimer;
     private int statusType = -1;
     private boolean isShieldOn = false;
-    private long lastTimeDamaged = 0;
+//    private long lastTimeDamaged = 0;
     private int meteoroidsDestroyedWithShield = 0;
 
     private Shield shield;
     private Status status;
     private Damage damage;
 
-    public Rocket(GameView view, Context context) {
-        super(view, context);
-        this.game = view.getGame();
+    public Rocket(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         this.bitmap = createBitmap(context.getResources().getDrawable(R.drawable.rocket));
-        this.shield = new Shield(view, context);
-        this.status = new Status(view, context);
+        this.shield = new Shield(view, context, viewModel);
+        this.status = new Status(view, context, viewModel);
         this.width = this.bitmap.getWidth() / NUMBER_OF_COLUMNS;
         this.height = this.bitmap.getHeight() / NUMBER_OF_ROWS;
         this.statusTimer = new TimerExec();
@@ -136,26 +136,26 @@ public class Rocket extends Sprite {
 
     public void inflictDamage(int value) {
         if (!this.isShieldOn) {
-            game.decreaseMilk(value);
-            lastTimeDamaged = this.game.gameTimer.getElapsedTime();
+            Achievement.getInstance().decreaseMilk(value);
+//            lastTimeDamaged = GameTimerTick.getElapsedTime();
             if (this.damage == null && !this.isPoisoned()) {
-                this.damage = new Damage(view, context);
+                this.damage = new Damage(view, context, viewModel);
             }
         } else {
             this.meteoroidsDestroyedWithShield++;
             if (meteoroidsDestroyedWithShield >= 10) {
-                this.view.getGame().destroyed10MeteoroidsWitchShield();
+                Achievement.getInstance().destroyed10MeteoroidsWitchShield();
             }
         }
     }
 
     public void activateShield() {
         if (this.statusType == POISON) {
-            this.view.getGame().healedPoison();
+            Achievement.getInstance().healedPoison();
         }
         this.clearStatus();
         this.isShieldOn = true;
-        view.getGame().showToast(view.getResources().getString(R.string.ToastShield));
+        viewModel.showToast(R.string.ToastShield);
 
         this.statusTimer.cancel();
         this.statusTimer.setTimer(new TimerExecTask() {
@@ -174,7 +174,7 @@ public class Rocket extends Sprite {
 
     public void inflictPoison(final short damagePerTick) {
         if (!this.isShieldOn) {
-            view.getGame().showToast(view.getResources().getString(R.string.ToastPoison));
+            viewModel.showToast(R.string.ToastPoison);
             this.clearStatus();
             this.statusType = POISON;
             this.status.row = POISON;
@@ -197,7 +197,7 @@ public class Rocket extends Sprite {
 
     public void inflictIce() {
         if (!this.isShieldOn) {
-            view.getGame().showToast(view.getResources().getString(R.string.ToastFrost));
+            viewModel.showToast(R.string.ToastFrost);
             this.clearStatus();
             this.statusType = FROST;
             this.status.row = FROST;
@@ -219,7 +219,7 @@ public class Rocket extends Sprite {
 
     public void inflictStun() {
         if (!this.isShieldOn) {
-            view.getGame().showToast(view.getResources().getString(R.string.ToastFlash));
+            viewModel.showToast((R.string.ToastFlash));
             this.clearStatus();
             this.statusType = STUN;
             this.status.row = STUN;
@@ -239,7 +239,7 @@ public class Rocket extends Sprite {
         }
     }
 
-    public long getLastTimeDamaged() {
-        return lastTimeDamaged;
-    }
+//    public long getLastTimeDamaged() {
+//        return lastTimeDamaged;
+//    }
 }

@@ -7,14 +7,16 @@ package com.quchen.spacecowboy.sprite.powerup;
 
 import android.content.Context;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.sprite.Sprite;
+import com.quchen.spacecowboy.sprite.powerup.coin.Coin;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public abstract class PowerUp extends Sprite {
 
-    public PowerUp(GameView view, Context context) {
-        super(view, context);
+    public PowerUp(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
     }
 
     @Override
@@ -22,7 +24,7 @@ public abstract class PowerUp extends Sprite {
         super.onCollision();
         this.isTimedOut = true;
         if (!(this instanceof Coin)) {
-            this.view.getGame().collectedPowerUp();
+            viewModel.collectedPowerUp();
         }
     }
 

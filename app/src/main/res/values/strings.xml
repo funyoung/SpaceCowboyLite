@@ -76,4 +76,6 @@
     <string name="shopFullUpgraded">Fully upgraded</string>
     
     <string name="bestScoreText">Your best score is:</string>
+    <string name="level_up">Level-Up</string>
+    <string name="sleepy_hint">Are your Sleeping?\\nCollect Coins!</string>
 </resources>

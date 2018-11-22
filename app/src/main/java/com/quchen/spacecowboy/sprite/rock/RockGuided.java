@@ -8,10 +8,11 @@ package com.quchen.spacecowboy.sprite.rock;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.Util;
 import com.quchen.spacecowboy.sprite.Sprite;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class RockGuided extends Rock {
     public static final byte POWER_GUIDED_ROCK = 1;
@@ -21,8 +22,8 @@ public class RockGuided extends Rock {
 
     private static Bitmap globalBitmap;
 
-    public RockGuided(GameView view, Context context) {
-        super(view, context);
+    public RockGuided(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.guided_rock));
         }
@@ -35,7 +36,7 @@ public class RockGuided extends Rock {
 
     @Override
     public void move(float speedModifier) {
-        if (this.view.getRocket().getX() < this.x) {
+        if (viewModel.getRocket().getX() < this.x) {
             this.speedX--;
             if (this.speedX < -MAX_SPEED * Util.GUIDED_ROCK_SPEED_FACTOR) {
                 this.speedX = (int) (-MAX_SPEED * Util.GUIDED_ROCK_SPEED_FACTOR);
@@ -48,7 +49,7 @@ public class RockGuided extends Rock {
         }
 
 
-        if (this.view.getRocket().getY() < this.y) {
+        if (viewModel.getRocket().getY() < this.y) {
             this.speedY--;
             if (this.speedY < -MAX_SPEED * Util.GUIDED_ROCK_SPEED_FACTOR) {
                 this.speedY = (int) (-MAX_SPEED * Util.GUIDED_ROCK_SPEED_FACTOR);

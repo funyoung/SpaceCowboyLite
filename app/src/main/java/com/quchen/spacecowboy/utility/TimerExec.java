@@ -13,7 +13,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TimerExec {
-    public static List<TimerExec> allTimers = new ArrayList<>();
+    private static List<TimerExec> allTimers = new ArrayList<>();
     private volatile boolean isRunning;
     private volatile boolean isPaused;
     private volatile long interval;
@@ -55,6 +55,18 @@ public class TimerExec {
             t.cancel();
         }
         TimerExec.allTimers.clear();
+    }
+
+    public static void onPause() {
+        for (TimerExec timer : allTimers) {
+            timer.pause();
+        }
+    }
+
+    public static void onResume() {
+        for (TimerExec timer : allTimers) {
+            timer.resume();
+        }
     }
 
     public void start() {

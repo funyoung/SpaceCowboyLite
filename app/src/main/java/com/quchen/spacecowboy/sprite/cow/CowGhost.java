@@ -8,9 +8,11 @@ package com.quchen.spacecowboy.sprite.cow;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.AccomplishmentsBox;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class CowGhost extends Cow {
     public static final int COW_TYPE = 4;
@@ -21,8 +23,9 @@ public class CowGhost extends Cow {
 
     protected static Bitmap globalBitmap;
 
-    public CowGhost(GameView view, Context context) {
-        super(view, context);
+    public CowGhost(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.ghost_cow));
         }
@@ -37,8 +40,8 @@ public class CowGhost extends Cow {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getRocket().activateShield();
-        this.view.getGame().getAccomplishments().catch_them_all |= (1 << COW_TYPE);
+        viewModel.getRocket().activateShield();
+        AccomplishmentsBox.instance().catch_them_all |= (1 << COW_TYPE);
     }
 
     @Override

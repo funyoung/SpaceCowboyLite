@@ -8,9 +8,10 @@ package com.quchen.spacecowboy.sprite.powerup;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class PowerUpBell extends PowerUp {
     public static final int ANIMATION_TIME = 150;
@@ -22,8 +23,9 @@ public class PowerUpBell extends PowerUp {
     protected static Bitmap globalBitmap;
     protected static int sound = -1;
 
-    public PowerUpBell(GameView view, Context context) {
-        super(view, context);
+    public PowerUpBell(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.bell));
         }
@@ -40,8 +42,8 @@ public class PowerUpBell extends PowerUp {
     @Override
     public void onCollision() {
         super.onCollision();
-        view.spawnCows((int) (Math.random() * MAX_COWSPAWNS) + MIN_COWSPAWNS);
-        view.attractCows();
+        viewModel.spawnCows((int) (Math.random() * MAX_COWSPAWNS) + MIN_COWSPAWNS);
+        viewModel.attractCows();
     }
 
     @Override

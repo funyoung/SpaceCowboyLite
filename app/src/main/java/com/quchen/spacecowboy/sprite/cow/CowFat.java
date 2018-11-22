@@ -8,11 +8,13 @@ package com.quchen.spacecowboy.sprite.cow;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.AccomplishmentsBox;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.TimerExec;
 import com.quchen.spacecowboy.utility.TimerExecTask;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class CowFat extends Cow {
     public static final int COW_TYPE = 3;
@@ -24,8 +26,9 @@ public class CowFat extends Cow {
     protected static Bitmap globalBitmap;
     private TimerExec fadeOutTimer;
 
-    public CowFat(GameView view, Context context) {
-        super(view, context);
+    public CowFat(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.fat_cow));
         }
@@ -53,7 +56,7 @@ public class CowFat extends Cow {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getGame().getAccomplishments().catch_them_all |= (1 << COW_TYPE);
+        AccomplishmentsBox.instance().catch_them_all |= (1 << COW_TYPE);
     }
 
 }

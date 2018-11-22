@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy.sprite.powerup;
+package com.quchen.spacecowboy.sprite.powerup.coin;
 /**
  * Coin that give 5 coins
  *
@@ -8,16 +8,19 @@ package com.quchen.spacecowboy.sprite.powerup;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.Achievement;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class Coin5 extends Coin {
     public static final byte NUMBER_OF_ROWS = 1;
     public static final byte NUMBER_OF_COLUMNS = 12;
     protected static Bitmap globalBitmap;
 
-    public Coin5(GameView view, Context context) {
-        super(view, context);
+    public Coin5(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.coin5));
         }
@@ -29,7 +32,7 @@ public class Coin5 extends Coin {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getGame().increasePoints(5 - 1);
-        this.view.getGame().redCoinCollected();
+        viewModel.increasePoints(5 - 1);
+        Achievement.getInstance().redCoinCollected();
     }
 }

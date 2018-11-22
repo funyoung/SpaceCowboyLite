@@ -8,10 +8,13 @@ package com.quchen.spacecowboy.sprite.cow;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.AccomplishmentsBox;
+import com.quchen.spacecowboy.view.Achievement;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.sprite.Sprite;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class Cow extends Sprite {
     public static final int COW_TYPE = 0;
@@ -23,8 +26,9 @@ public class Cow extends Sprite {
     protected static Bitmap globalBitmapMirror;
     protected static int sound = -1;
 
-    public Cow(GameView view, Context context) {
-        super(view, context);
+    public Cow(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.cow));
             globalBitmapMirror = getHorizontalMirroredBitmap(globalBitmap);
@@ -46,10 +50,10 @@ public class Cow extends Sprite {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getGame().increaseMilk(this.power);
+        Achievement.getInstance().increaseMilk(this.power);
         this.isTimedOut = true;
-        this.view.getGame().milkedCow();
-        this.view.getGame().getAccomplishments().catch_them_all |= (1 << COW_TYPE);
+        viewModel.milkedCow();
+        AccomplishmentsBox.instance().catch_them_all |= (1 << COW_TYPE);
     }
 
     @Override

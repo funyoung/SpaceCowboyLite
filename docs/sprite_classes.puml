@@ -1,0 +1,43 @@
+@startuml
+
+abstract class Sprite
+interface Collection
+
+Sprite <|-- Cow
+Sprite <|-- PowerUp
+Sprite <|-- Rock
+Sprite <|-- BackGround
+Sprite <|-- Damage
+Sprite <|-- Rocket
+Sprite <|-- Shield
+Sprite <|-- Status
+
+Cow <|-- CowDance
+Cow <|-- CowFat
+Cow <|-- CowGhost
+Cow <|-- CowOld
+Cow <|-- CowZombie
+
+PowerUp <|-- Coin
+Coin <|-- Coin5
+PowerUp <|-- PowerUpBell
+PowerUp <|-- PowerUpMilkContainer
+PowerUp <|-- PowerUpNitrokaese
+
+Rock <|-- RockFat
+Rock <|-- RockFlash
+Rock <|-- RockFrozen
+Rock <|-- RockGuided
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml

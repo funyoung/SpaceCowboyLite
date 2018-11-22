@@ -69,7 +69,7 @@ public class TiltSensor implements SensorEventListener {
             y = (mValuesOrientation[2] * Util.TO_DEGREE);
         }
 
-        ((Tiltable) tilter).onTiltChange(x, y);
+        tilter.onTiltChange(x, y);
     }
 
 }

@@ -8,9 +8,10 @@ package com.quchen.spacecowboy.sprite.powerup;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.Achievement;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
-import com.quchen.spacecowboy.sprite.powerup.PowerUp;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class PowerUpMilkContainer extends PowerUp {
     public static final byte MILK_CONTAINER_MAX_INCREASE = 5;
@@ -19,8 +20,9 @@ public class PowerUpMilkContainer extends PowerUp {
     public static final byte NUMBER_OF_COLUMNS = 1;
     protected static Bitmap globalBitmap;
 
-    public PowerUpMilkContainer(GameView view, Context context) {
-        super(view, context);
+    public PowerUpMilkContainer(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.milk));
         }
@@ -34,7 +36,7 @@ public class PowerUpMilkContainer extends PowerUp {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getGame().increaseMilkMax(MILK_CONTAINER_MAX_INCREASE);
-        this.view.getGame().increaseMilk(MILK_IN_CONTAINER);
+        Achievement.getInstance().increaseMilkMax(MILK_CONTAINER_MAX_INCREASE);
+        Achievement.getInstance().increaseMilk(MILK_IN_CONTAINER);
     }
 }

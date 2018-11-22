@@ -13,8 +13,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public abstract class Sprite {
     public static final short SPEED_DEFAULT = 5;
@@ -37,12 +38,17 @@ public abstract class Sprite {
     protected short frameTimeCounter;
     protected boolean isTimedOut = false;
 
-    protected GameView view;
-    protected Context context;
+    // todo: 去掉view和Context的依赖
+    protected final GameView view;
+    protected final Context context;
 
-    public Sprite(GameView view, Context context) {
+    protected final GameViewModel viewModel;
+
+    public Sprite(GameView view, Context context, GameViewModel viewModel) {
         this.view = view;
         this.context = context;
+        this.viewModel = viewModel;
+
         this.width = 200;
         this.height = 200;
         frameTime = ANIMATION_TIME / Util.UPDATE_INTERVAL;
@@ -142,18 +148,15 @@ public abstract class Sprite {
             this.col = (byte) ((this.col + 1) % this.colNr);
             this.frameTimeCounter = 0;
         }
-        x += (speedX * speedModifier) - this.view.getBGxSpeed();
-        y += (speedY * speedModifier) - this.view.getBGySpeed();
+        x += (speedX * speedModifier) - viewModel.getBGxSpeed();
+        y += (speedY * speedModifier) - viewModel.getBGySpeed();
     }
 
     public boolean isOutOfRange() {
-        if (this.x > this.view.getWidth() * 3
+        return this.x > this.view.getWidth() * 3
                 || this.x < -view.getWidth() * 2
                 || this.y > this.view.getHeight() * 3
-                || this.y < -view.getHeight() * 2) {
-            return true;
-        }
-        return false;
+                || this.y < -view.getHeight() * 2;
     }
 
     /**
@@ -175,20 +178,13 @@ public abstract class Sprite {
         int dy = m1y - m2y;
         int d = (int) Math.sqrt(dy * dy + dx * dx);
 
-        if (d < (this.width + sprite.width) * factor
-                || d < (this.height + sprite.height) * factor) {
-            return true;
-        } else {
-            return false;
-        }
+        return d < (this.width + sprite.width) * factor
+                || d < (this.height + sprite.height) * factor;
     }
 
     public boolean isTouching(int x, int y) {
-        if (x + Util.ATTACK_AREA_EFFECT > this.x && x - Util.ATTACK_AREA_EFFECT < this.x + this.width
-                && y + Util.ATTACK_AREA_EFFECT > this.y && y - Util.ATTACK_AREA_EFFECT < this.y + this.height) {
-            return true;
-        }
-        return false;
+        return x + Util.ATTACK_AREA_EFFECT > this.x && x - Util.ATTACK_AREA_EFFECT < this.x + this.width
+                && y + Util.ATTACK_AREA_EFFECT > this.y && y - Util.ATTACK_AREA_EFFECT < this.y + this.height;
     }
 
     public void onCollision() {

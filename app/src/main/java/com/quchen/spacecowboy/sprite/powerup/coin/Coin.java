@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy.sprite.powerup;
+package com.quchen.spacecowboy.sprite.powerup.coin;
 /**
  * Coin
  *
@@ -8,9 +8,11 @@ package com.quchen.spacecowboy.sprite.powerup;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
+import com.quchen.spacecowboy.sprite.powerup.PowerUp;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class Coin extends PowerUp {
     public static final short ANIMATION_TIME = 100;
@@ -20,8 +22,9 @@ public class Coin extends PowerUp {
     protected static Bitmap globalBitmap;
     protected static int sound = -1;
 
-    public Coin(GameView view, Context context) {
-        super(view, context);
+    public Coin(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.coin));
         }
@@ -40,7 +43,7 @@ public class Coin extends PowerUp {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getGame().increasePoints(1);
+        viewModel.increasePoints(1);
     }
 
     @Override

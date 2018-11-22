@@ -1,4 +1,4 @@
-package com.quchen.spacecowboy.utility;
+package com.quchen.spacecowboy.view;
 /**
  * Class to store all accomplishments.
  *
@@ -80,6 +80,15 @@ public class AccomplishmentsBox {
     public volatile int meteoroids = 0;
     public volatile int powerups = 0;
 
+    private static AccomplishmentsBox instance;
+    public static AccomplishmentsBox instance() {
+        if (null == instance) {
+            instance = new AccomplishmentsBox();
+        }
+        return instance;
+    }
+
+    private AccomplishmentsBox() {}
     /**
      * Stores the score and achievements locally.
      *

@@ -8,9 +8,10 @@ package com.quchen.spacecowboy.sprite.cow;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.AccomplishmentsBox;
+import com.quchen.spacecowboy.view.GameView;
 import com.quchen.spacecowboy.R;
-import com.quchen.spacecowboy.sprite.cow.Cow;
+import com.quchen.spacecowboy.view.GameViewModel;
 
 public class CowOld extends Cow {
     public static final int COW_TYPE = 2;
@@ -21,8 +22,9 @@ public class CowOld extends Cow {
     protected static Bitmap globalBitmap;
     protected static Bitmap globalBitmapMirror;
 
-    public CowOld(GameView view, Context context) {
-        super(view, context);
+    public CowOld(GameView view, Context context, GameViewModel viewModel) {
+        super(view, context, viewModel);
+
         if (globalBitmap == null) {
             globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.old_cow));
             globalBitmapMirror = getHorizontalMirroredBitmap(globalBitmap);
@@ -74,6 +76,6 @@ public class CowOld extends Cow {
     @Override
     public void onCollision() {
         super.onCollision();
-        this.view.getGame().getAccomplishments().catch_them_all |= (1 << COW_TYPE);
+        AccomplishmentsBox.instance().catch_them_all |= (1 << COW_TYPE);
     }
 }

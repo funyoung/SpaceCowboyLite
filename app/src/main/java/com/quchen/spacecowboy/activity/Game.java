@@ -9,14 +9,10 @@ package com.quchen.spacecowboy.activity;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -24,47 +20,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.quchen.spacecowboy.utility.AccomplishmentsBox;
-import com.quchen.spacecowboy.GameView;
+import com.quchen.spacecowboy.view.Option;
 import com.quchen.spacecowboy.R;
 import com.quchen.spacecowboy.utility.TiltSensor;
 import com.quchen.spacecowboy.utility.TimerExec;
-import com.quchen.spacecowboy.utility.TimerExecTask;
 import com.quchen.spacecowboy.utility.Util;
+import com.quchen.spacecowboy.view.GameTimerTick;
+import com.quchen.spacecowboy.view.GameView;
 
 public class Game extends AbstractMainActivity implements OnTouchListener {
-
-    /**
-     * Makes the game instance accessible for everyone
-     */
-    public static Game theGame;
-    private final AccomplishmentsBox outbox = new AccomplishmentsBox();
-    private final long gameTimerTick = 1000;
-    public TimerExec gameTimer = new TimerExec(gameTimerTick, -1, new TimerExecTask() {
-        @Override
-        public void onTick() {
-            checkAchievments();
-        }
-
-        @Override
-        public void onFinish() {
-        }
-    });
     private GameView view;
     private TiltSensor tiltSensor;
     private TextView stats;
-    private AccomplishmentsBox outboxLocal;
-    private volatile short milk = Util.START_MILK;
-    private volatile short milkContainer = Util.START_CONTAINER;
+
     private Dialog inGameMenu;
-    //achievments
-    private boolean catchedDancecowFrozen;
-    private boolean healedPoison;
-    private boolean destroyed10MeteoroidsWitchShield;
-    private boolean redCoinCollected;
-    private long lastTimeCoin;
-    private long lowMilkTime = -1;
-    private long fullMilkTime = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +50,6 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
             e.printStackTrace();
         }
 
-        theGame = this;
         setUpGameSettings();
 
         getWindow().setFlags(
@@ -95,25 +63,25 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
 
         tiltSensor = new TiltSensor(view, (SensorManager) getSystemService(Context.SENSOR_SERVICE));
 
-        gameTimer.start();
+        GameTimerTick.addOnTickListener(() -> checkAchievments());
+        GameTimerTick.start();
     }
 
     private void setUpGameSettings() {
         Util.lvl = 0;
-        outboxLocal = AccomplishmentsBox.getLocal(this);
+//        outboxLocal = AccomplishmentsBox.getLocal(this);
 
-        this.milk = (short) (Util.START_MILK + 2 * Shop.getBoughItems(this, Shop.moreStartMilkSave));
         Util.COIN_COLLISION_FACTOR = Util.DISTANCE_COLLISION_FACTOR
-                + Util.DISTANCE_COLLISION_FACTOR * Shop.getBoughItems(this, Shop.coinMagnetSave) / 2;
+                + Util.DISTANCE_COLLISION_FACTOR * Option.getBoughItems(this, Option.coinMagnetSave) / 2;
         Util.COW_COLLISION_FACTOR = Util.DISTANCE_COLLISION_FACTOR
-                + Util.DISTANCE_COLLISION_FACTOR * Shop.getBoughItems(this, Shop.cowMagnetSave) / 2;
+                + Util.DISTANCE_COLLISION_FACTOR * Option.getBoughItems(this, Option.cowMagnetSave) / 2;
         Util.ROCK_COLLISION_FACTOR = Util.DISTANCE_COLLISION_FACTOR
-                - Util.DISTANCE_COLLISION_FACTOR * Shop.getBoughItems(this, Shop.betterRocketSave) * 5 / 12;
+                - Util.DISTANCE_COLLISION_FACTOR * Option.getBoughItems(this, Option.betterRocketSave) * 5 / 12;
 
-        Util.GUIDED_ROCK_SPEED_FACTOR = 1.0f / (Shop.getBoughItems(this, Shop.guidedRockProtectionSave) + 1);
-        Util.STATUS_EFFECT_FACTOR = 1.0f / (Shop.getBoughItems(this, Shop.statusEffectReductionSave) + 1);
+        Util.GUIDED_ROCK_SPEED_FACTOR = 1.0f / (Option.getBoughItems(this, Option.guidedRockProtectionSave) + 1);
+        Util.STATUS_EFFECT_FACTOR = 1.0f / (Option.getBoughItems(this, Option.statusEffectReductionSave) + 1);
         Util.ATTACK_AREA_EFFECT = (int) getResources().getDisplayMetrics().density *
-                (Util.ATTACK_AREA_EFFECT_INCREASE + Shop.getBoughItems(this, Shop.explosionAttackSave));
+                (Util.ATTACK_AREA_EFFECT_INCREASE + Option.getBoughItems(this, Option.explosionAttackSave));
     }
 
     @Override
@@ -130,34 +98,12 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
 
         ((Button) inGameMenu.findViewById(R.id.ingamemenuYes)).setTextSize(Util.getTextSize());
         ((Button) inGameMenu.findViewById(R.id.ingamemenuNo)).setTextSize(Util.getTextSize());
-        ((Button) inGameMenu.findViewById(R.id.ingamemenuSettings)).setTextSize(Util.getTextSize());
         ((TextView) inGameMenu.findViewById(R.id.ingamemenuText)).setTextSize(Util.getTextSize());
 
 
-        inGameMenu.setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                onResume();
-            }
-        });
-        inGameMenu.findViewById(R.id.ingamemenuYes).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        inGameMenu.findViewById(R.id.ingamemenuNo).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inGameMenu.dismiss();
-            }
-        });
-        inGameMenu.findViewById(R.id.ingamemenuSettings).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent("com.quchen.spacecowboy.activity.Config"));
-            }
-        });
+        inGameMenu.setOnDismissListener(dialog -> onResume());
+        inGameMenu.findViewById(R.id.ingamemenuYes).setOnClickListener(v -> finish());
+        inGameMenu.findViewById(R.id.ingamemenuNo).setOnClickListener(v -> inGameMenu.dismiss());
     }
 
     private void setLayouts() {
@@ -169,12 +115,9 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
         Button pauseButton = new Button(this);
         pauseButton.setText("  ||  ");
         pauseButton.setTextSize(Util.getTextSize());
-        pauseButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onPause();
-                inGameMenu.show();
-            }
+        pauseButton.setOnClickListener(v -> {
+            onPause();
+            inGameMenu.show();
         });
 
         stats = new TextView(this);
@@ -186,18 +129,6 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
         mainLayout.addView(view);
 
         setContentView(mainLayout);
-    }
-
-    public void updateStatsText() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                stats.setText("\t\t" + "Milk: " + getMilk() + " / " + getMilkMax()
-                        + "\t\t\t\t\t\t" + "LVL: " + Util.lvl
-                        + "\t\t\t\t\t\t" + "Coins: " + getAccomplishments().score);
-            }
-        });
-
     }
 
     @Override
@@ -229,58 +160,6 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
         return true;
     }
 
-    public void increasePoints(int value) {
-        lastTimeCoin = this.gameTimer.getElapsedTime();
-        outbox.score += value;
-        int tmp = Util.lvl;
-        Util.lvl = (short) (outbox.score / Util.COINS_FOR_LEVELUP);
-        if (tmp < Util.lvl) {
-            showToast("Level-Up");
-        }
-    }
-
-    public AccomplishmentsBox getAccomplishments() {
-        return this.outbox;
-    }
-
-    public int getMilk() {
-        return milk;
-    }
-
-    public void increaseMilk(int milk) {
-        int oldMilk = this.milk;
-        this.milk += milk;
-        if (this.milk > this.milkContainer) {
-            this.milk = this.milkContainer;
-        }
-
-        if (this.milk != 1) {
-            this.lowMilkTime = -1;
-        }
-        if (this.milk == this.milkContainer && oldMilk != this.milkContainer) {
-            this.fullMilkTime = this.gameTimer.getElapsedTime();
-        }
-    }
-
-    public void decreaseMilk(int milk) {
-        this.milk -= milk;
-
-        if (this.milk == 1 && milk != 0) {
-            this.lowMilkTime = this.gameTimer.getElapsedTime();
-        }
-        if (this.milk != this.milkContainer) {
-            this.fullMilkTime = -1;
-        }
-    }
-
-    public int getMilkMax() {
-        return milkContainer;
-    }
-
-    public void increaseMilkMax(int milk) {
-        this.milkContainer += milk;
-    }
-
     @Override
     public void onBackPressed() {
         this.onPause();
@@ -288,46 +167,42 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
     }
 
     public void showToast(final String txt) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_SHORT).show();
-            }
-        });
+        runOnUiThread(() -> Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_SHORT).show());
     }
 
+//    private AccomplishmentsBox outboxLocal;
     private void checkAchievments() {
 //		GamesClient gamesClient = getGameHelper().getGamesClient();
 //
-//		if(gameTimer.getElapsedTime() > 5*60*1000){
+//		if(GameTimerTick.getElapsedTime() > 5*60*1000){
 //			if(!outboxLocal.survived_5 && !outbox.survived_5
 //					 && getGameHelper().isSignedIn()){
 //				gamesClient.unlockAchievement(getResources().getString(R.string.achievement_survived_5));
 //			}
 //			outbox.survived_5 = true;
 //		}
-//		if(gameTimer.getElapsedTime() > 15*60*1000){
+//		if(GameTimerTick.getElapsedTime() > 15*60*1000){
 //			if(!outboxLocal.survived_15 && !outbox.survived_15
 //					 && getGameHelper().isSignedIn()){
 //				gamesClient.unlockAchievement(getResources().getString(R.string.achievement_survived_15));
 //			}
 //			outbox.survived_15 = true;
 //		}
-//		if(gameTimer.getElapsedTime() - this.view.getRocket().getLastTimeDamaged() >= 60*1000){
+//		if(GameTimerTick.getElapsedTime() - this.view.getRocket().getLastTimeDamaged() >= 60*1000){
 //			if(!outboxLocal.undamaged_1 && !outbox.undamaged_1
 //					 && getGameHelper().isSignedIn()){
 //				gamesClient.unlockAchievement(getResources().getString(R.string.achievement_undamaged_1));
 //			}
 //			outbox.undamaged_1 = true;
 //		}
-//		if(gameTimer.getElapsedTime() - this.view.getRocket().getLastTimeDamaged() >= 5*60*1000){
+//		if(GameTimerTick.getElapsedTime() - this.view.getRocket().getLastTimeDamaged() >= 5*60*1000){
 //			if(!outboxLocal.undamaged_5 && !outbox.undamaged_5
 //					 && getGameHelper().isSignedIn()){
 //				gamesClient.unlockAchievement(getResources().getString(R.string.achievement_undamaged_5));
 //			}
 //			outbox.undamaged_5 = true;
 //		}
-//		if(gameTimer.getElapsedTime() - this.lastTimeCoin >= 30*1000){
+//		if(GameTimerTick.getElapsedTime() - this.lastTimeCoin >= 30*1000){
 //			sleepyCowboy();
 //
 //			if(!outboxLocal.sleepy_cowboy && !outbox.sleepy_cowboy
@@ -417,14 +292,14 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
 //			outbox.red_coin = true;
 //			this.redCoinCollected = false;
 //		}
-//		if(this.lowMilkTime != -1 && gameTimer.getElapsedTime() - this.lowMilkTime >= 60*1000){
+//		if(this.lowMilkTime != -1 && GameTimerTick.getElapsedTime() - this.lowMilkTime >= 60*1000){
 //			if(!outboxLocal.low_milk_1_minutes && !outbox.low_milk_1_minutes
 //					 && getGameHelper().isSignedIn()){
 //				gamesClient.unlockAchievement(getResources().getString(R.string.achievement_low_milk_1_minutes));
 //			}
 //			outbox.low_milk_1_minutes = true;
 //		}
-//		if(this.fullMilkTime != -1 && gameTimer.getElapsedTime() - this.fullMilkTime >= 2*60*1000){
+//		if(this.fullMilkTime != -1 && GameTimerTick.getElapsedTime() - this.fullMilkTime >= 2*60*1000){
 //			if(!outboxLocal.full_milk_2_minutes && !outbox.full_milk_2_minutes
 //					 && getGameHelper().isSignedIn()){
 //				gamesClient.unlockAchievement(getResources().getString(R.string.achievement_full_milk_2_minutes));
@@ -475,46 +350,15 @@ public class Game extends AbstractMainActivity implements OnTouchListener {
 //		}
     }
 
-    public void killedMeteorid() {
-        this.outbox.meteoroids++;
+    public void updateStatsText(final String text) {
+        runOnUiThread(() -> stats.setText(text));
     }
 
-    public void milkedCow() {
-        this.outbox.cows++;
-    }
-
-    public void collectedPowerUp() {
-        this.outbox.powerups++;
-    }
-
-    private void sleepyCowboy() {
-        showToast("Are your Sleeping?\n" +
-                "Collect Coins!");
-        view.punishment = true;
-        lastTimeCoin = this.gameTimer.getElapsedTime();
-    }
 
 //	@Override
 //	public void onSignInFailed() {}
 //
 //	@Override
 //	public void onSignInSucceeded() {}
-
-    public void catchedDancecowFrozen() {
-        this.catchedDancecowFrozen = true;
-    }
-
-    public void healedPoison() {
-        this.healedPoison = true;
-    }
-
-    public void destroyed10MeteoroidsWitchShield() {
-        this.destroyed10MeteoroidsWitchShield = true;
-    }
-
-    public void redCoinCollected() {
-        this.redCoinCollected = true;
-    }
-
 }
 

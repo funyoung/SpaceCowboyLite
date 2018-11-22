@@ -1,0 +1,33 @@
+@startuml
+
+abstract class AbstractList
+abstract AbstractCollection
+
+interface Runnable
+interface Tiltable
+
+FragmentActivity <|-- AbstractMainActivity
+AbstractMainActivity <|-- Game
+
+Runnable <|- GameView
+Tiltable <|- GameView
+SurfaceView <|- GameView
+
+class Game {
+GameView view
+}
+
+class GameView {
+Rock[] rocks
+Cow[] cows
+PowerUp[] powerUps
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml
